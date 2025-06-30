@@ -3,6 +3,25 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@font-face {
+  font-family: "Gamberino";
+  src: url("/fonts/Gambarino-Regular.woff2") format("woff2"),
+    url("/fonts/Gambarino-Regular.woff") format("woff"),
+    url("/fonts/Gambarino-Regular") format("truetype"),
+    url("/fonts/Gambarino-Regular.eot") format("embedded-opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Switzer";
+  src: url("/fonts/Switzer-Regular.woff2") format("woff2"),
+    url("/fonts/Switzer-Regular.woff") format("woff"),
+    url("/fonts/Switzer-Regular") format("truetype"),
+    url("/fonts/Switzer-Regular.eot") format("embedded-opentype");
+  font-weight: 400;
+  font-style: normal;
+}
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -45,6 +64,8 @@
 
 :root {
   --radius: 0.625rem;
+  --background: oklch(97.315% 0.00011 271.152);
+  --foreground: oklch(0.141 0.005 285.823);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.141 0.005 285.823);
   --popover: oklch(1 0 0);
@@ -74,8 +95,8 @@
   --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
   --sidebar-border: oklch(0.92 0.004 286.32);
   --sidebar-ring: oklch(0.705 0.015 286.067);
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.141 0.005 285.823);
+  --font-gamberino: "Gamberino", sans-serif;
+  --font-switzer: "Switzer", sans-serif;
 }
 
 .dark {
@@ -118,5 +139,11 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-switzer);
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-gamberino);
   }
 }
