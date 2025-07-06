@@ -18,6 +18,7 @@ import {
 
 export default function Home() {
   const [isMuted, setIsMuted] = useState(true);
+  const [randomImageNumber] = useState(() => Math.floor(Math.random() * 20) + 1);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const handleVideoClick = () => {
@@ -99,9 +100,15 @@ export default function Home() {
               </CardDescription>
             </CardHeader>
             <CardFooter>
-              <Button variant="secondary" className="w-full">
-                <Link href="/tutorial">Tutorial</Link>
-              </Button>
+              <Link href="/tutorial" className="w-full group" tabIndex={-1}>
+                <Button
+                  variant="secondary"
+                  className="w-full cursor-pointer"
+                  asChild
+                >
+                  <span className="w-full h-full block">Tutorial</span>
+                </Button>
+              </Link>
             </CardFooter>
           </Card>
         </div>
@@ -118,7 +125,7 @@ export default function Home() {
             <CardContent>
               <AspectRatio ratio={1 / 1} className="bg-muted rounded-lg mb-8">
                 <Image
-                  src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80"
+                  src="https://cdn.jsdelivr.net/gh/projektmodul-ki/static/images/Example_18.png"
                   alt="Photo by Drew Beamer"
                   fill
                   className="h-full w-full rounded-lg object-cover dark:brightness-[0.2] dark:grayscale"
