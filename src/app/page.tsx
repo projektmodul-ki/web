@@ -1,8 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Navigation } from "@/components/navigation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useState, useRef } from "react";
 import {
   Card,
   CardAction,
@@ -14,6 +17,15 @@ import {
 } from "@/components/ui/card";
 
 export default function Home() {
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const handleVideoClick = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted;
+      setIsMuted(videoRef.current.muted);
+    }
+  };
   return (
     <div className="min-h-screen">
       <Navigation />
@@ -27,7 +39,7 @@ export default function Home() {
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-black leading-tight mb-8">
               Museum of
               <br />
-              <span className="text-green-800">Interactive</span> Art
+              <span className="animated-color">Interactive</span> Art
             </h1>
           </div>
         </div>
@@ -35,14 +47,42 @@ export default function Home() {
       {/* Artworks Section */}
       <section className="pb-16 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto w-full max-w-2xl">
-          <AspectRatio ratio={16 / 9} className="bg-muted rounded-lg">
-            <Image
-              src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80"
-              alt="Photo by Drew Beamer"
-              fill
-              className="h-full w-full rounded-lg object-cover dark:brightness-[0.2] dark:grayscale"
+          <div
+            className="bg-muted rounded-lg w-full mx-auto relative cursor-pointer"
+            style={{ maxHeight: "80vh", aspectRatio: "9/16" }}
+            onClick={handleVideoClick}
+          >
+            <video
+              ref={videoRef}
+              src="https://sv0rle2dok1qvb3d.public.blob.vercel-storage.com/pmki-trailer-RfdlZ3NYoJRbRc0wkmsgzIRHg1hOwM.mp4"
+              autoPlay
+              muted
+              playsInline
+              loop
+              className="h-full w-full rounded-lg object-cover"
+              style={{
+                maxHeight: "80vh",
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                borderRadius: "inherit",
+              }}
             />
-          </AspectRatio>
+            {isMuted && (
+              <div className="absolute bottom-4 right-4 pointer-events-none">
+                <div className="bg-black bg-opacity-50 text-white px-3 py-1 rounded text-xs font-medium">
+                  Tap to unmute
+                </div>
+              </div>
+            )}
+            {!isMuted && (
+              <div className="absolute bottom-4 right-4 pointer-events-none">
+                <div className="bg-black bg-opacity-50 text-white px-3 py-1 rounded text-xs font-medium">
+                  Tap to mute
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </section>
       {/* How-To Card */}
