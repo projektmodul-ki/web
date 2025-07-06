@@ -5,7 +5,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Navigation } from "@/components/navigation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   Card,
   CardAction,
@@ -18,8 +18,15 @@ import {
 
 export default function Home() {
   const [isMuted, setIsMuted] = useState(true);
-  const [randomImageNumber] = useState(() => Math.floor(Math.random() * 20) + 1);
+  const [randomImageNumber, setRandomImageNumber] = useState(1);
+  const [isClient, setIsClient] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    // Only run on client side to avoid hydration mismatch
+    setIsClient(true);
+    setRandomImageNumber(Math.floor(Math.random() * 20) + 1);
+  }, []);
 
   const handleVideoClick = () => {
     if (videoRef.current) {
@@ -125,8 +132,10 @@ export default function Home() {
             <CardContent>
               <AspectRatio ratio={1 / 1} className="bg-muted rounded-lg mb-8">
                 <Image
-                  src="https://cdn.jsdelivr.net/gh/projektmodul-ki/static/images/Example_18.png"
-                  alt="Photo by Drew Beamer"
+                  src={`https://cdn.jsdelivr.net/gh/projektmodul-ki/static/images/Example_${
+                    isClient ? randomImageNumber : 1
+                  }.png`}
+                  alt="Interactive artwork example"
                   fill
                   className="h-full w-full rounded-lg object-cover dark:brightness-[0.2] dark:grayscale"
                 />
