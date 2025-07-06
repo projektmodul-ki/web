@@ -4,6 +4,20 @@ import { ArrowLeft, Users, Target, Lightbulb, Award } from "lucide-react";
 import Link from "next/link";
 
 export default function Artworks() {
+  // Create array of numbers 1-20 and shuffle them
+  const shuffleArray = (array: number[]) => {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
+
+  const imageNumbers = shuffleArray(
+    Array.from({ length: 20 }, (_, i) => i + 1)
+  );
+
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
@@ -34,48 +48,18 @@ export default function Artworks() {
       {/* Image grid aspect ratio 1/1 */}
       <section className="py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div className="aspect-square bg-gray-200 rounded-lg overflow-hidden">
-            <img
-              src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80"
-              alt="Artwork 1"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="aspect-square bg-gray-200 rounded-lg overflow-hidden">
-            <img
-              src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80"
-              alt="Artwork 2"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="aspect-square bg-gray-200 rounded-lg overflow-hidden">
-            <img
-              src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80"
-              alt="Artwork 3"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="aspect-square bg-gray-200 rounded-lg overflow-hidden">
-            <img
-              src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80"
-              alt="Artwork 4"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="aspect-square bg-gray-200 rounded-lg overflow-hidden">
-            <img
-              src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80"
-              alt="Artwork 5"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="aspect-square bg-gray-200 rounded-lg overflow-hidden">
-            <img
-              src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80"
-              alt="Artwork 6"
-              className="w-full h-full object-cover"
-            />
-          </div>
+          {imageNumbers.map((imageNumber, index) => (
+            <div
+              key={index}
+              className="aspect-square bg-gray-200 rounded-lg overflow-hidden"
+            >
+              <img
+                src={`https://cdn.jsdelivr.net/gh/projektmodul-ki/static/images/Example_${imageNumber}.png`}
+                alt={`Interactive artwork ${imageNumber}`}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          ))}
         </div>
       </section>
     </div>
