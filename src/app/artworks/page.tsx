@@ -1,4 +1,4 @@
-import { Navigation } from "@/components/ui/navigation";
+import { Navigation } from "@/components/navigation";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Users, Target, Lightbulb, Award } from "lucide-react";
 import Link from "next/link";
