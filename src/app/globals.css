@@ -133,6 +133,35 @@
   --sidebar-ring: oklch(0.552 0.016 285.938);
 }
 
+/* Animated color cycling for text */
+@keyframes colorCycle {
+  0% {
+    color: #166534; /* green-800 */
+  }
+  16.66% {
+    color: #dc2626; /* red-600 */
+  }
+  33.33% {
+    color: #dc2626;
+  }
+  50% {
+    color: #ca8a04; /* yellow-600 */
+  }
+  66.66% {
+    color: #ca8a04;
+  }
+  83.33% {
+    color: #2563eb; /* blue-600 */
+  }
+  100% {
+    color: #166534; /* green-800 */
+  }
+}
+
+.animated-color {
+  animation: colorCycle 8s ease-in-out infinite;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
