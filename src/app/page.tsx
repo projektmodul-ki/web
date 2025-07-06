@@ -62,7 +62,6 @@ export default function Home() {
           >
             <video
               ref={videoRef}
-              src="https://sv0rle2dok1qvb3d.public.blob.vercel-storage.com/pmki-trailer-RfdlZ3NYoJRbRc0wkmsgzIRHg1hOwM.mp4"
               autoPlay
               muted
               playsInline
@@ -75,7 +74,17 @@ export default function Home() {
                 objectFit: "cover",
                 borderRadius: "inherit",
               }}
-            />
+            >
+              <source
+                src="https://sv0rle2dok1qvb3d.public.blob.vercel-storage.com/pmki-trailer-RfdlZ3NYoJRbRc0wkmsgzIRHg1hOwM.mp4"
+                type="video/mp4"
+              />
+              <source
+                src="https://files.catbox.moe/hswxfq.mp4"
+                type="video/mp4"
+              />
+              Your browser does not support the video tag.
+            </video>
             {isMuted && (
               <div className="absolute bottom-4 right-4 pointer-events-none">
                 <div className="bg-black bg-opacity-50 text-white px-3 py-1 rounded text-xs font-medium">
@@ -132,7 +141,7 @@ export default function Home() {
             <CardContent>
               <AspectRatio ratio={1 / 1} className="bg-muted rounded-lg mb-8">
                 <Image
-                  src={`https://cdn.jsdelivr.net/gh/projektmodul-ki/static/images/Example_${
+                  src={`https://cdn.jsdelivr.net/gh/projektmodul-ki/static/example-artworks/Example_${
                     isClient ? randomImageNumber : 1
                   }.png`}
                   alt="Interactive artwork example"
@@ -161,7 +170,7 @@ export default function Home() {
             {/* Example Behind the Scenes Card */}
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg font-bold">Das Konzept</CardTitle>
+                <CardTitle className="text-lg font-bold">The Concept</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600">
@@ -173,24 +182,56 @@ export default function Home() {
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg font-bold">
-                  Die Software
+                  The Technology
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Our installation uses advanced computer vision and AI to
+                  create unique art pieces based on user interactions. It all
+                  comes together in the Touchdesigner software, which processes
+                  user input and generates real-time visuals.
+                  <br />
+                  <Image
+                    src="https://cdn.jsdelivr.net/gh/projektmodul-ki/static/example-artworks/Example_1.png"
+                    alt="Touchdesigner software screenshot"
+                    width={300}
+                    height={225}
+                    className="rounded mt-4 shadow"
+                  />
+                  <br />
+                  <span>
+                    <Link
+                      href="https://github.com/projektmodul-ki/touchdesigner"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-grey-600 underline hover:text-gray-800"
+                    >
+                      Read more.
+                    </Link>
+                  </span>
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg font-bold">Der Aufbau</CardTitle>
+                <CardTitle className="text-lg font-bold">
+                  The Installation
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  For the installation, we built a custom wall that allowed us
+                  to put a screen inside. The screen was then decorated with a
+                  frame.
+                  <br />
+                  <Image
+                    src="https://cdn.jsdelivr.net/gh/projektmodul-ki/static/images/wall-colored.jpg"
+                    alt="Touchdesigner software screenshot"
+                    width={200}
+                    height={225}
+                    className="rounded mt-4 shadow"
+                  />
                 </p>
               </CardContent>
             </Card>
@@ -202,12 +243,11 @@ export default function Home() {
         <div className="max-w-4xl mx-auto">
           <div className="bg-gray-50 rounded-lg p-8">
             <blockquote className="text-lg text-gray-800 italic mb-4">
-              "Museums are more than buildings filled with artifacts—they're
-              living institutions that connect us to our past, present, and
-              future. Our technology should enhance that mission, not complicate
-              it."
+              “The power of art is that it can connect us to one another, and to
+              larger truths about what it means to be alive and what it means to
+              be human.”
             </blockquote>
-            <cite className="text-gray-600 text-sm">— Our Team</cite>
+            <cite className="text-gray-600 text-sm">— Daniel Levitin</cite>
           </div>
         </div>
       </section>
@@ -215,7 +255,7 @@ export default function Home() {
       <footer className="bg-gray-100 py-8">
         <div className="max-w-7xl mx-auto text-center">
           <p className="text-gray-600 text-sm">
-            © 2023 Museum of Interactive Art. All rights reserved.
+            Projektmodul KI SoSe 2025 Hochschule München
           </p>
         </div>
       </footer>

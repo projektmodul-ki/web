@@ -54,7 +54,7 @@ export default function Artworks() {
               className="aspect-square bg-gray-200 rounded-lg overflow-hidden"
             >
               <img
-                src={`https://cdn.jsdelivr.net/gh/projektmodul-ki/static/images/Example_${imageNumber}.png`}
+                src={`https://cdn.jsdelivr.net/gh/projektmodul-ki/static/example-artworks/Example_${imageNumber}.png`}
                 alt={`Interactive artwork ${imageNumber}`}
                 className="w-full h-full object-cover"
               />
