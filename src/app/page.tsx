@@ -140,13 +140,15 @@ export default function Home() {
           <Card>
             <CardContent>
               <AspectRatio ratio={1 / 1} className="bg-muted rounded-lg mb-8">
-                <Image
+                <img
                   src={`https://cdn.jsdelivr.net/gh/projektmodul-ki/static/example-artworks/Example_${
                     isClient ? randomImageNumber : 1
                   }.png`}
                   alt="Interactive artwork example"
-                  fill
                   className="h-full w-full rounded-lg object-cover dark:brightness-[0.2] dark:grayscale"
+                  onError={(e) => {
+                    e.currentTarget.src = "/Logo 400x400.svg";
+                  }}
                 />
               </AspectRatio>
               <Link href="/artworks" className="text-lg font-bold mb-2 block">
@@ -192,12 +194,15 @@ export default function Home() {
                   comes together in the Touchdesigner software, which processes
                   user input and generates real-time visuals.
                   <br />
-                  <Image
+                  <img
                     src="https://cdn.jsdelivr.net/gh/projektmodul-ki/static/example-artworks/Example_1.png"
                     alt="Touchdesigner software screenshot"
                     width={300}
                     height={225}
                     className="rounded mt-4 shadow"
+                    onError={(e) => {
+                      e.currentTarget.src = "/Logo 400x400.svg";
+                    }}
                   />
                   <br />
                   <span>
@@ -225,12 +230,15 @@ export default function Home() {
                   to put a screen inside. The screen was then decorated with a
                   frame.
                   <br />
-                  <Image
+                  <img
                     src="https://cdn.jsdelivr.net/gh/projektmodul-ki/static/images/wall-colored.jpg"
-                    alt="Touchdesigner software screenshot"
+                    alt="Installation wall screenshot"
                     width={200}
                     height={225}
                     className="rounded mt-4 shadow"
+                    onError={(e) => {
+                      e.currentTarget.src = "/Logo 400x400.svg";
+                    }}
                   />
                 </p>
               </CardContent>
