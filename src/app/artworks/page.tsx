@@ -1,22 +1,79 @@
+"use client";
+
 import { Navigation } from "@/components/navigation";
-import { Button } from "@/components/ui/button";
 import { ArrowLeft, Users, Target, Lightbulb, Award } from "lucide-react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+
+interface ArtworkImage {
+  key: string;
+  filename: string;
+  url: string;
+  lastModified?: string;
+}
+
+interface ArtworksResponse {
+  images: ArtworkImage[];
+  total: number;
+  page: number;
+  limit: number;
+  hasMore: boolean;
+  totalPages: number;
+}
 
 export default function Artworks() {
-  // Create array of numbers 1-20 and shuffle them
-  const shuffleArray = (array: number[]) => {
-    const shuffled = [...array];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  const [images, setImages] = useState<ArtworkImage[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [total, setTotal] = useState(0);
+
+  // Fetch images from API
+  const fetchImages = async (pageNumber: number, append = false) => {
+    try {
+      if (append) {
+        setLoadingMore(true);
+      } else {
+        setLoading(true);
+      }
+
+      const response = await fetch(`/api/artworks?page=${pageNumber}&limit=6`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch artworks");
+      }
+
+      const data = (await response.json()) as ArtworksResponse;
+
+      if (append) {
+        setImages((prev) => [...prev, ...data.images]);
+      } else {
+        setImages(data.images);
+      }
+
+      setHasMore(data.hasMore);
+      setTotal(data.total);
+      setPage(pageNumber);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to load artworks");
+    } finally {
+      setLoading(false);
+      setLoadingMore(false);
     }
-    return shuffled;
   };
 
-  const imageNumbers = shuffleArray(
-    Array.from({ length: 20 }, (_, i) => i + 1)
-  );
+  // Load initial images
+  useEffect(() => {
+    fetchImages(1);
+  }, []);
+
+  // Load more images
+  const handleLoadMore = () => {
+    if (hasMore && !loadingMore) {
+      fetchImages(page + 1, true);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -45,21 +102,93 @@ export default function Artworks() {
         </div>
       </section>
 
+      {/* Features  */}
+
       {/* Image grid aspect ratio 1/1 */}
       <section className="py-8 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {imageNumbers.map((imageNumber, index) => (
-            <div
-              key={index}
-              className="aspect-square bg-gray-200 rounded-lg overflow-hidden"
-            >
-              <img
-                src={`https://cdn.jsdelivr.net/gh/projektmodul-ki/static/example-artworks/Example_${imageNumber}.png`}
-                alt={`Interactive artwork ${imageNumber}`}
-                className="w-full h-full object-cover"
-              />
+        <div className="max-w-7xl mx-auto">
+          {loading && (
+            <div className="text-center py-12">
+              <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-black"></div>
+              <p className="mt-4 text-gray-600">Loading artworks...</p>
             </div>
-          ))}
+          )}
+
+          {error && (
+            <div className="text-center py-12">
+              <p className="text-red-600 mb-4">{error}</p>
+              <button
+                onClick={() => window.location.reload()}
+                className="px-4 py-2 bg-black text-white rounded hover:bg-gray-800"
+              >
+                Retry
+              </button>
+            </div>
+          )}
+
+          {!loading && !error && (
+            <>
+              {/* Stats */}
+              <div className="text-center mb-8">
+                <p className="text-gray-600">
+                  Showing {images.length} of {total} artworks
+                </p>
+              </div>
+
+              {/* Image Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {images.map((image, index) => (
+                  <div
+                    key={image.key}
+                    className="aspect-square bg-gray-200 rounded-lg overflow-hidden group hover:shadow-lg transition-shadow duration-300"
+                  >
+                    <img
+                      src={image.url}
+                      alt={`Interactive artwork ${image.filename}`}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      loading="lazy"
+                    />
+                  </div>
+                ))}
+              </div>
+
+              {/* Load More Button */}
+              {hasMore && (
+                <div className="text-center mt-12">
+                  <button
+                    onClick={handleLoadMore}
+                    disabled={loadingMore}
+                    className="px-8 py-3 bg-black text-white rounded-lg hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+                  >
+                    {loadingMore ? (
+                      <div className="flex items-center space-x-2">
+                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                        <span>Loading more...</span>
+                      </div>
+                    ) : (
+                      "Load More"
+                    )}
+                  </button>
+                </div>
+              )}
+
+              {/* End Message */}
+              {!hasMore && images.length > 0 && (
+                <div className="text-center mt-12">
+                  <p className="text-gray-600">
+                    You've seen all {total} artworks! 🎨
+                  </p>
+                </div>
+              )}
+            </>
+          )}
+
+          {/* Empty State */}
+          {!loading && !error && images.length === 0 && (
+            <div className="text-center py-12">
+              <p className="text-gray-600">No artworks found.</p>
+            </div>
+          )}
         </div>
       </section>
     </div>
