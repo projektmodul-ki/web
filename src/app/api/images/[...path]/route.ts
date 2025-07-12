@@ -12,10 +12,11 @@ const s3Client = new S3Client({
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { path: string[] } }
+  { params }: { params: Promise<{ path: string[] }> }
 ) {
   try {
-    const imagePath = params.path.join("/");
+    const { path } = await params;
+    const imagePath = path.join("/");
 
     const command = new GetObjectCommand({
       Bucket: process.env.CLOUDFLARE_R2_BUCKET_NAME!,
