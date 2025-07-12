@@ -31,7 +31,7 @@ export function Navigation() {
             >
               <Button
                 variant="default"
-                className="bg-black text-white hover:bg-gray-800"
+                className="bg-black text-white hover:bg-gray-800 cursor-pointer"
               >
                 See Artworks
               </Button>
@@ -74,7 +74,7 @@ export function Navigation() {
                 >
                   <Button
                     variant="default"
-                    className="w-full bg-black text-white hover:bg-gray-800"
+                    className="w-full bg-black text-white hover:bg-gray-800 cursor-pointer"
                   >
                     See Artworks
                   </Button>
