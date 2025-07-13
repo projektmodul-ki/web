@@ -59,7 +59,9 @@ export default {
         .map((obj) => ({
           key: obj.key,
           filename: obj.key.split("/").pop()!,
-          url: `https://web.moia.workers.dev/api/images/${obj.key}`,
+          url: `https://images-api.moia.workers.dev/api/images/images/${obj.key
+            .split("/")
+            .pop()}`,
           lastModified: obj.uploaded?.toISOString(),
           size: obj.size,
         }));
