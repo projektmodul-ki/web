@@ -1,0 +1,16 @@
+{
+  "name": "artworks-api",
+  "main": "workers/artworks.ts",
+  "compatibility_date": "2025-04-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "r2_buckets": [
+    {
+      "binding": "ARTWORKS_BUCKET",
+      "bucket_name": "artworks"
+    }
+  ],
+  "vars": {
+    "CLOUDFLARE_ACCOUNT_ID": "7c463b13d4111b56b2614b66497535b2",
+    "CLOUDFLARE_R2_BUCKET_NAME": "artworks"
+  }
+}

@@ -9,6 +9,19 @@ const nextConfig: NextConfig = {
       "cdn.jsdelivr.net",
     ],
   },
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      // Add polyfills for Node.js APIs not available in Cloudflare Workers
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        net: false,
+        tls: false,
+        crypto: false,
+      };
+    }
+    return config;
+  },
 };
 
 export default nextConfig;

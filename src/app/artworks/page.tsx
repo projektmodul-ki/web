@@ -39,7 +39,7 @@ export default function Artworks() {
         setLoading(true);
       }
 
-      const response = await fetch(`/api/artworks?page=${pageNumber}&limit=6`);
+      const response = await fetch(`https://artworks-api.moia.workers.dev/api/artworks?page=${pageNumber}&limit=6`);
       if (!response.ok) {
         throw new Error("Failed to fetch artworks");
       }
