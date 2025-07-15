@@ -81,7 +81,7 @@ export default function Snapshot() {
 
           <p className="text-xl text-gray-600 leading-relaxed">
             This is your personal snapshot of the interactive artwork you
-            created.
+            created. Long-press or right-click to save the image, or share it.
           </p>
         </div>
       </section>
@@ -106,7 +106,7 @@ export default function Snapshot() {
                 <AlertCircle className="h-12 w-12 text-red-500" />
                 <div>
                   <p className="text-red-600 font-semibold mb-2">
-                    Failed to load snapshot
+                    The Installation seems to be offline.
                   </p>
                   <p className="text-gray-600 text-sm mb-4">{error}</p>
                   <Button
