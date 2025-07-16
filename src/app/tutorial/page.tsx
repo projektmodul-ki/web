@@ -37,12 +37,12 @@ export default function Tutorial() {
         <div className="max-w-4xl mx-auto pb-16">
           <div className="prose prose-lg max-w-none">
             <img
-              src="/left-pedestal.jpeg"
+              src="/right-pedestal.jpeg"
               alt="Left Pedestal - Shape the Art"
               className="w-full max-w-md mx-auto aspect-square object-cover rounded-lg mb-8"
             />
             <h2 className="text-3xl font-bold text-black mb-8">
-              Left Pedestal - Shape the Art
+              Right Pedestal - Shape the Art
             </h2>
 
             <div className="space-y-6 text-gray-700 leading-relaxed">
@@ -58,12 +58,12 @@ export default function Tutorial() {
         <div className="max-w-4xl mx-auto pb-16">
           <div className="prose prose-lg max-w-none">
             <img
-              src="/right-pedestal.jpeg"
-              alt="Right Pedestal - Adjust the style"
+              src="/left-pedestal.jpeg"
+              alt="Left Pedestal - Adjust the style"
               className="w-full max-w-md mx-auto aspect-square object-cover rounded-lg mb-8"
             />
             <h2 className="text-3xl font-bold text-black mb-8">
-              Right Pedestal - Adjust the style
+              Left Pedestal - Adjust the style
             </h2>
 
             <div className="space-y-6 text-gray-700 leading-relaxed">
