@@ -34,8 +34,13 @@ export default function Tutorial() {
 
       {/* Steps */}
       <section className="py-8 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto pb-8">
+        <div className="max-w-4xl mx-auto pb-16">
           <div className="prose prose-lg max-w-none">
+            <img
+              src="/left-pedestal.jpeg"
+              alt="Left Pedestal - Shape the Art"
+              className="w-full max-w-md mx-auto aspect-square object-cover rounded-lg mb-8"
+            />
             <h2 className="text-3xl font-bold text-black mb-8">
               Left Pedestal - Shape the Art
             </h2>
@@ -50,8 +55,13 @@ export default function Tutorial() {
             </div>
           </div>
         </div>
-        <div className="max-w-4xl mx-auto pb-8">
+        <div className="max-w-4xl mx-auto pb-16">
           <div className="prose prose-lg max-w-none">
+            <img
+              src="/right-pedestal.jpeg"
+              alt="Right Pedestal - Adjust the style"
+              className="w-full max-w-md mx-auto aspect-square object-cover rounded-lg mb-8"
+            />
             <h2 className="text-3xl font-bold text-black mb-8">
               Right Pedestal - Adjust the style
             </h2>
@@ -70,8 +80,13 @@ export default function Tutorial() {
             </div>
           </div>
         </div>
-        <div className="max-w-4xl mx-auto pb-8">
+        <div className="max-w-4xl mx-auto pb-16">
           <div className="prose prose-lg max-w-none">
+            <img
+              src="/artwork.jpeg"
+              alt="Watch Your Artwork Come to Life"
+              className="w-full max-w-md mx-auto aspect-square object-cover rounded-lg mb-8"
+            />
             <h2 className="text-3xl font-bold text-black mb-8">
               Watch Your Artwork Come to Life
             </h2>
@@ -94,7 +109,7 @@ export default function Tutorial() {
             <div className="space-y-6 text-gray-700 leading-relaxed">
               <p className="text-lg">
                 Once you are happy with your artwork, you can save it by
-                scanning the QR code on the right pedestal. you can also browse
+                scanning the QR code on the right pedestal. You can also browse
                 a digital gallery of creations by other visitors on our website.
               </p>
             </div>
@@ -118,7 +133,7 @@ export default function Tutorial() {
               size="lg"
               className="bg-white text-black hover:bg-gray-100 px-8 py-3"
             >
-              <Link href="/">See other Artworks</Link>
+              <Link href="/artworks">See other Artworks</Link>
             </Button>
           </div>
         </div>
