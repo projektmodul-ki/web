@@ -142,7 +142,7 @@ export default function Artworks() {
                 {images.map((image, index) => (
                   <div
                     key={image.key}
-                    className="aspect-square bg-gray-200 rounded-lg overflow-hidden group hover:shadow-lg transition-shadow duration-300"
+                    className="aspect-video bg-gray-200 rounded-lg overflow-hidden group hover:shadow-lg transition-shadow duration-300"
                   >
                     <img
                       src={image.url}
