@@ -142,14 +142,43 @@ export default function Artworks() {
                 {images.map((image, index) => (
                   <div
                     key={image.key}
-                    className="aspect-video bg-gray-200 rounded-lg overflow-hidden group hover:shadow-lg transition-shadow duration-300"
+                    className="aspect-video bg-gray-200 rounded-lg overflow-hidden group hover:shadow-lg transition-shadow duration-300 relative flex flex-col"
                   >
                     <img
                       src={image.url}
                       alt={`Interactive artwork ${image.filename}`}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 flex-1"
                       loading="lazy"
                     />
+                    <div className="absolute bottom-2 right-2 left-2 flex justify-end pointer-events-none">
+                      <button
+                        type="button"
+                        onClick={async (e) => {
+                          e.preventDefault();
+                          try {
+                            const response = await fetch(image.url);
+                            const blob = await response.blob();
+                            const url = window.URL.createObjectURL(blob);
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.download = image.filename;
+                            document.body.appendChild(a);
+                            a.click();
+                            setTimeout(() => {
+                              window.URL.revokeObjectURL(url);
+                              document.body.removeChild(a);
+                            }, 100);
+                          } catch (err) {
+                            // Optionally handle error
+                          }
+                        }}
+                        className="pointer-events-auto flex items-center justify-center p-2 bg-white/90 text-black rounded-full shadow hover:bg-black hover:text-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
+                        title="Download image"
+                        tabIndex={0}
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4" /></svg>
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
