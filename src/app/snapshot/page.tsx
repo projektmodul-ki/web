@@ -121,7 +121,7 @@ export default function Snapshot() {
             )}
 
             {imageUrl && !error && (
-              <div className="w-full relative">
+              <div className="w-full relative flex flex-col items-center">
                 {isImageLoading && (
                   <div className="absolute inset-0 flex items-center justify-center bg-gray-100 rounded-lg">
                     <div className="animate-spin rounded-full h-8 w-8 border-4 border-gray-300 border-t-black"></div>
@@ -135,6 +135,11 @@ export default function Snapshot() {
                   onError={handleImageError}
                   style={{ opacity: isImageLoading ? 0 : 1 }}
                 />
+                <a href="/artworks" className="mt-6 w-full flex justify-center">
+                  <Button className="bg-black hover:bg-gray-800 text-white px-6 py-2 text-lg font-semibold rounded-lg">
+                    See All Artworks
+                  </Button>
+                </a>
               </div>
             )}
           </div>
